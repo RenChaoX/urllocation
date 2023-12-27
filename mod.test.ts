@@ -1,4 +1,5 @@
-import urlLocation from "./index";
+import { assertEquals } from "https://deno.land/std@0.210.0/assert/mod.ts";
+import urlLocation from "./mod.ts";
 
 const urlTestList = [
   {
@@ -98,9 +99,11 @@ const urlTestList = [
     },
   },
   {
-    url: `https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=68018901_2_oem_dg&wd=正则 pathname&oq=正则hostname&rsv_pq=f2193f1e000456f3&rsv_t=8e6cxLSllkRxszhajdO+nG5DbvEBQ9KG7is4yjjZ1g4XP1db8TH3VhDqeEjSHqsxbIIEAcwqkeQ&rqlang=cn&rsv_dl=tb&rsv_enter=0&rsv_btype=t&inputT=1345&rsv_sug3=19&rsv_sug1=9&rsv_sug7=100&rsv_n=2&prefixsug=正则 pathname&rsp=0&rsv_sug4=3127`,
+    url:
+      `https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=68018901_2_oem_dg&wd=正则 pathname&oq=正则hostname&rsv_pq=f2193f1e000456f3&rsv_t=8e6cxLSllkRxszhajdO+nG5DbvEBQ9KG7is4yjjZ1g4XP1db8TH3VhDqeEjSHqsxbIIEAcwqkeQ&rqlang=cn&rsv_dl=tb&rsv_enter=0&rsv_btype=t&inputT=1345&rsv_sug3=19&rsv_sug1=9&rsv_sug7=100&rsv_n=2&prefixsug=正则 pathname&rsp=0&rsv_sug4=3127`,
     test: {
-      href: "https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=68018901_2_oem_dg&wd=正则 pathname&oq=正则hostname&rsv_pq=f2193f1e000456f3&rsv_t=8e6cxLSllkRxszhajdO+nG5DbvEBQ9KG7is4yjjZ1g4XP1db8TH3VhDqeEjSHqsxbIIEAcwqkeQ&rqlang=cn&rsv_dl=tb&rsv_enter=0&rsv_btype=t&inputT=1345&rsv_sug3=19&rsv_sug1=9&rsv_sug7=100&rsv_n=2&prefixsug=正则 pathname&rsp=0&rsv_sug4=3127",
+      href:
+        "https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=68018901_2_oem_dg&wd=正则 pathname&oq=正则hostname&rsv_pq=f2193f1e000456f3&rsv_t=8e6cxLSllkRxszhajdO+nG5DbvEBQ9KG7is4yjjZ1g4XP1db8TH3VhDqeEjSHqsxbIIEAcwqkeQ&rqlang=cn&rsv_dl=tb&rsv_enter=0&rsv_btype=t&inputT=1345&rsv_sug3=19&rsv_sug1=9&rsv_sug7=100&rsv_n=2&prefixsug=正则 pathname&rsp=0&rsv_sug4=3127",
       origin: "https://www.baidu.com",
       protocol: "https:",
       host: "www.baidu.com",
@@ -114,8 +117,9 @@ const urlTestList = [
       hashPathName: "",
     },
   },
-  {// 出现#号，肯定是hash
-    url: 'https://abc.com.cn/services/?q=#速度#/detail?a=1&b=2',
+  {
+    // 出现#号，肯定是hash
+    url: "https://abc.com.cn/services/?q=#速度#/detail?a=1&b=2",
     test: {
       href: "https://abc.com.cn/services/?q=#速度#/detail?a=1&b=2",
       origin: "https://abc.com.cn",
@@ -128,34 +132,36 @@ const urlTestList = [
       hash: "#速度#/detail?a=1&b=2",
       hashSearch: "?a=1&b=2",
       hashPathName: "#速度#/detail",
-    }
+    },
   },
   {
-    url: "https://wx.17u.cn/busminatest/?m=11&refid=123456&oid=oatgX0b5k8hpwQh94y9yXoNmmBDY&uid=ohmdTt_A09SOWZiE9TSayjyy__g0&useropenid=o8i9s5UETd3yKvsqtaR166k507GY&userunionid=&channelid=10167&t=1685437384153#/listFusion?startdatetime=2023-05-31&startname=%E8%8B%8F%E5%B7%9E&arrivename=%E5%8D%97%E4%BA%AC&startStation=&arriveStation=&depCId=1229&desCId=1227&fromHome=1",
+    url:
+      "https://wx.17u.cn/busminatest/?m=11&refid=123456&oid=oatgX0b5k8hpwQh94y9yXoNmmBDY&uid=ohmdTt_A09SOWZiE9TSayjyy__g0&useropenid=o8i9s5UETd3yKvsqtaR166k507GY&userunionid=&channelid=10167&t=1685437384153#/listFusion?startdatetime=2023-05-31&startname=%E8%8B%8F%E5%B7%9E&arrivename=%E5%8D%97%E4%BA%AC&startStation=&arriveStation=&depCId=1229&desCId=1227&fromHome=1",
     test: {
-      href: "https://wx.17u.cn/busminatest/?m=11&refid=123456&oid=oatgX0b5k8hpwQh94y9yXoNmmBDY&uid=ohmdTt_A09SOWZiE9TSayjyy__g0&useropenid=o8i9s5UETd3yKvsqtaR166k507GY&userunionid=&channelid=10167&t=1685437384153#/listFusion?startdatetime=2023-05-31&startname=%E8%8B%8F%E5%B7%9E&arrivename=%E5%8D%97%E4%BA%AC&startStation=&arriveStation=&depCId=1229&desCId=1227&fromHome=1",
+      href:
+        "https://wx.17u.cn/busminatest/?m=11&refid=123456&oid=oatgX0b5k8hpwQh94y9yXoNmmBDY&uid=ohmdTt_A09SOWZiE9TSayjyy__g0&useropenid=o8i9s5UETd3yKvsqtaR166k507GY&userunionid=&channelid=10167&t=1685437384153#/listFusion?startdatetime=2023-05-31&startname=%E8%8B%8F%E5%B7%9E&arrivename=%E5%8D%97%E4%BA%AC&startStation=&arriveStation=&depCId=1229&desCId=1227&fromHome=1",
       origin: "https://wx.17u.cn",
       protocol: "https:",
       host: "wx.17u.cn",
       hostname: "wx.17u.cn",
       port: "",
       pathname: "/busminatest/",
-      search: "?m=11&refid=123456&oid=oatgX0b5k8hpwQh94y9yXoNmmBDY&uid=ohmdTt_A09SOWZiE9TSayjyy__g0&useropenid=o8i9s5UETd3yKvsqtaR166k507GY&userunionid=&channelid=10167&t=1685437384153",
-      hash: "#/listFusion?startdatetime=2023-05-31&startname=%E8%8B%8F%E5%B7%9E&arrivename=%E5%8D%97%E4%BA%AC&startStation=&arriveStation=&depCId=1229&desCId=1227&fromHome=1",
-      hashSearch: "?startdatetime=2023-05-31&startname=%E8%8B%8F%E5%B7%9E&arrivename=%E5%8D%97%E4%BA%AC&startStation=&arriveStation=&depCId=1229&desCId=1227&fromHome=1",
+      search:
+        "?m=11&refid=123456&oid=oatgX0b5k8hpwQh94y9yXoNmmBDY&uid=ohmdTt_A09SOWZiE9TSayjyy__g0&useropenid=o8i9s5UETd3yKvsqtaR166k507GY&userunionid=&channelid=10167&t=1685437384153",
+      hash:
+        "#/listFusion?startdatetime=2023-05-31&startname=%E8%8B%8F%E5%B7%9E&arrivename=%E5%8D%97%E4%BA%AC&startStation=&arriveStation=&depCId=1229&desCId=1227&fromHome=1",
+      hashSearch:
+        "?startdatetime=2023-05-31&startname=%E8%8B%8F%E5%B7%9E&arrivename=%E5%8D%97%E4%BA%AC&startStation=&arriveStation=&depCId=1229&desCId=1227&fromHome=1",
       hashPathName: "#/listFusion",
-    }
-  }
+    },
+  },
 ];
 
-describe("test urlLocation", function () {
+Deno.test("test urlLocation", async (t) => {
   for (const item of urlTestList) {
-    it(`test ${item.url}`, function () {
-      // console.time(item.url)
-      let res = urlLocation(item.url);
-      // console.timeEnd(item.url)
-
-      expect(res).toEqual(item.test);
+    await t.step(`test ${item.url}`, () => {
+      const res = urlLocation(item.url);
+      assertEquals(res, item.test);
     });
   }
 });
